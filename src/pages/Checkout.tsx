@@ -31,7 +31,30 @@ const Checkout = () => {
       setIsProcessing(false);
       navigate('/');
     }, 2000);
+    // const options = {
+    //   key: "YOUR_RAZORPAY_KEY",
+    //   amount: finalTotal * 100,
+    //   currency: "INR",
+    //   name: "Eco Store",
+    //   description: "Order Payment",
+
+    //   handler: function () {
+    //     sendWhatsappOrder();
+    //     clearCart();
+    //     toast.success("Payment Successful!");
+    //     navigate("/");
+    //   },
+
+    //   theme: {
+    //     color: "#22c55e"
+    //   }
+    // };
+
+    // const razor = new (window as any).Razorpay(options);
+    // razor.open();
+    // setIsProcessing(false);
   };
+
 
   if (cart.length === 0) {
     return (
