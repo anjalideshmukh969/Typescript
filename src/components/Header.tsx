@@ -1,18 +1,19 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ShoppingCart, Leaf, Menu, User, X, LogOut, Heart } from 'lucide-react';
+import { Search, ShoppingCart, Leaf, Menu, User as UserIcon, X, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCart } from '@/contexts/CartContext';
 import { Badge } from '@/components/ui/badge';
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
+import type { User } from "@/types/user";
 
 const Header = () => {
   const { totalItems } = useCart();
   const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -42,7 +43,8 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-card border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4 gap-4">
-          {/* logo */}
+
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="p-2 bg-gradient-eco rounded-lg transition-transform group-hover:scale-105">
               <Leaf className="h-6 w-6 text-primary-foreground" />
@@ -52,9 +54,9 @@ const Header = () => {
               <p className="text-xs text-muted-foreground">Green Shopping</p>
             </div>
           </Link>
-          {/* search */}
 
-          <form onSubmit={handleSearch} className="flex-1 max-w-xl mx-4 ">
+          {/* Search */}
+          <form onSubmit={handleSearch} className="flex-1 max-w-xl mx-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -66,23 +68,26 @@ const Header = () => {
               />
             </div>
           </form>
-          {/* right side */}
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
 
+          {/* Right Side */}
+          <div className="flex items-center gap-2">
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
 
             {user ? (
               <>
                 <Button variant="ghost" size="sm" className="hidden md:flex gap-2">
-                  <User className="h-4 w-4" />
+                  <UserIcon className="h-4 w-4" />
                   {user.fullName || user.email}
                 </Button>
+
                 <Button variant="ghost" size="icon" onClick={handleLogout}>
                   <LogOut className="h-5 w-5" />
                 </Button>
@@ -90,79 +95,51 @@ const Header = () => {
             ) : (
               <Link to="/auth">
                 <Button variant="ghost" size="sm" className="hidden md:flex gap-2">
-                  <User className="h-4 w-4" />
+                  <UserIcon className="h-4 w-4" />
                   User
                 </Button>
               </Link>
             )}
-            {/* cart */}
+
+            {/* Cart */}
             <Link to="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <Badge
-                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-accent text-accent-foreground"
-                  >
+                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-accent text-accent-foreground">
                     {totalItems}
                   </Badge>
                 )}
               </Button>
             </Link>
+
           </div>
         </div>
-        {/* mobile drop down menu */}
+
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden pb-4 border-t pt-4">
             <div className="flex flex-col gap-4">
-              <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                Home
-              </Link>
-
-              <Link to="/products" onClick={() => setIsMenuOpen(false)}>
-                Products
-              </Link>
-
-              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                Contact
-              </Link>
+              <Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+              <Link to="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
 
               {!user && (
-                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                  Login
-                </Link>
+                <Link to="/auth" onClick={() => setIsMenuOpen(false)}>Login</Link>
               )}
             </div>
           </div>
         )}
 
-{/* dekstop navigation */}
-
-        <nav className=" items-center justify-center hidden md:flex gap-6 pb-3 overflow-x-auto">
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">
-              Home
-            </Link>
-            <Link to="/products" className="text-sm font-medium text-foreground hover:text-primary transition-colors whitespace-nowrap">
-              Products
-            </Link>
-
-            <Link to="/contact" className="text-sm font-medium transition-colors hover:text-primary">
-              Contact
-            </Link>
-          </nav>
-          {/* <Link to="/products?category=clothing" className="text-sm text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
-            Clothing
-          </Link>
-          <Link to="/products?category=accessories" className="text-sm text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
-            Accessories
-          </Link>
-          <Link to="/products?category=home" className="text-sm text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
-            Home & Kitchen
-          </Link>
-          <Link to="/products?category=fitness" className="text-sm text-muted-foreground hover:text-primary transition-colors whitespace-nowrap">
-            Fitness
-          </Link> */}
+        {/* Desktop Navigation */}
+        <nav className="items-center justify-center hidden md:flex gap-6 pb-3 overflow-x-auto">
+          <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-sm font-medium hover:text-primary">Home</Link>
+            <Link to="/products" className="text-sm font-medium hover:text-primary">Products</Link>
+            <Link to="/contact" className="text-sm font-medium hover:text-primary">Contact</Link>
+          </div>
         </nav>
+
       </div>
     </header>
   );

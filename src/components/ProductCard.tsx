@@ -8,6 +8,9 @@ import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   product: Product;
+  onAddToCart?: (product: Product) => void;        // optional prop
+  onToggleWishlist?: (product: Product) => void;   // optional prop
+  isInWishlist?: boolean;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
@@ -45,7 +48,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             {product.name}
           </h3>
         </Link>
-        
+
         <div className="flex items-center gap-1 mb-2">
           <Star className="h-4 w-4 fill-accent text-accent" />
           <span className="text-sm font-medium">{product.rating}</span>
