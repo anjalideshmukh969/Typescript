@@ -16,9 +16,7 @@ import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
 
-
 const queryClient = new QueryClient();
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -27,7 +25,6 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Header />
-          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
@@ -46,5 +43,4 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
-
 export default App;
