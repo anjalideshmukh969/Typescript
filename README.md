@@ -34,6 +34,7 @@ project-root
 ├── backend         # Express + TypeScript backend API
 │
 └── README.md
+
 ```
 
 ---
@@ -124,26 +125,13 @@ PORT=3000
 MONGO_URI=your_mongodb_connection_string
 ```
 
----
-
-# API Endpoints (Example)
-
-```
-GET /api/products
-POST /api/auth/login
-POST /api/auth/register
-GET /api/orders
-```
-
----
 
 # Future Improvements
 
 * Payment gateway integration
-* Admin dashboard
 * Product management
 * Order tracking
-* Deployment with Docker and CI/CD
+* Deployment with CI/CD
 
 ---
 
