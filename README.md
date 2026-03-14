@@ -1,6 +1,6 @@
 # E-Commerce MERN Project
 
-A full-stack e-commerce application built using the MERN stack with a modern TypeScript backend and a React-based frontend.
+E-Mart a ssustainable full-stack e-commerce application built using the MERN stack with a modern TypeScript backend and a React-based frontend.
 
 ## Tech Stack
 
@@ -10,13 +10,14 @@ A full-stack e-commerce application built using the MERN stack with a modern Typ
 * TypeScript
 * Modern UI generated using Lovable
 * API integration with backend
+* tailwind css + html
 
 ### Backend
 
 * Node.js
 * Express.js
 * TypeScript
-* REST API architecture
+* REST APIs
 
 ### Database
 
@@ -70,7 +71,7 @@ backend
 
 # Getting Started
 
-## Clone Repository
+## Clone the Repository
 
 ```
 git clone https://github.com/anjalideshmukh969/Typescript.git
