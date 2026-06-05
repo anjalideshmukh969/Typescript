@@ -1,6 +1,6 @@
 # E-Commerce MERN Project
 
-E-Mart a ssustainable full-stack e-commerce application built using MERN stack with a modern TypeScript backend and a React-based frontend.
+E-Mart is a ssustainable full-stack e-commerce website built using MERN stack with a modern TypeScript backend and a React-based frontend.
 
 ## Tech Stack
 
